@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <title>Page Title</title>
+        <style>
+            .sigma_round-button {
+                position: relative;
+                display: inline-block;
+            }
+
+            .sigma_round-button>span {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                font-weight: 700;
+                font-size: 40px;
+                line-height: 1;
+                color: #db4242;
+            }
+
+            b,
+            strong {
+                font-weight: 700;
+                color: #db4242;
+            }
+
+            .sigma_round-button>span span {
+                font-size: 20px;
+            }
+
+            .custom-primary {
+                color: #7E4555 !important;
+            }
+
+            .sigma_round-button svg {
+                width: 160px;
+                height: 160px;
+                overflow: visible;
+            }
+
+            .sigma_round-button .sigma_round-button-stroke {
+                fill: none;
+                stroke: #efefef;
+                stroke-width: 10;
+                stroke-linejoin: round;
+                stroke-miterlimit: 10;
+                position: relative;
+                z-index: -1;
+                color: #efefef;
+            }
+
+            .sigma_round-button .sigma_round-button-circle {
+                fill: none;
+                stroke: #7E4555;
+                -webkit-transform-origin: center center;
+                -ms-transform-origin: center center;
+                transform-origin: center center;
+                stroke-dashoffset: 700;
+                stroke-dasharray: 700;
+                stroke-width: 20px;
+                stroke-linejoin: round;
+                stroke-miterlimit: 10;
+                stroke-linecap: butt;
+                -webkit-transform: rotate(-90deg);
+                -ms-transform: rotate(-90deg);
+                transform: rotate(-90deg);
+                -webkit-transition: 1s;
+                -o-transition: 1s;
+                transition: 2s;
+                color: #7E4555;
+                stroke-linecap: round;
+            }
+        </style>
+    </head>
+
+    <body>
+        <div class="sigma_round-button mb-4">
+            <span> <b class="counter" id="counter" data-from="0" data-to="75">75</b> <span
+                    class="custom-primary">%</span> </span>
+            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                viewBox="0 0 197 197" enable-background="new 0 0 197 197" xml:space="preserve">
+                <circle class="sigma_round-button-stroke" stroke-linecap="round" cx="98.5" cy="98.6" r="97.5"></circle>
+                <circle class="sigma_progress-round sigma_round-button-circle" data-to="290" stroke-linecap="round"
+                    cx="98.5" cy="98.6" r="97.5" style="stroke-dashoffset: 290px;"></circle>
+            </svg>
+        </div>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+            integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+        <script type="text/javascript">
+            function animateValue(obj, start, end, duration) {
+                let startTimestamp = null;
+                const step = (timestamp) => {
+                    if (!startTimestamp) startTimestamp = timestamp;
+                    const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+                    obj.innerHTML = Math.floor(progress * (end - start) + start);
+                    if (progress < 1) {
+                        window.requestAnimationFrame(step);
+                    }
+                };
+                window.requestAnimationFrame(step);
+            }
+
+            const obj = document.getElementById("counter");
+            animateValue(obj, 0, 75, 5000);
+        </script>
+    </body>
+
+</html>
